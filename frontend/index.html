@@ -160,8 +160,11 @@
                 })
                 .catch(function (error) {
                     console.log("SDK Binary quirk detected. Trying direct fetch fallback...");
-                    // Robust Fallback
-                    fetch(apigClient.config.endpoint + '/photos/' + file.name, {
+
+                    // hardcodin url here to be safe
+                    var myApi = 'https://gxnc15hnk5.execute-api.us-east-1.amazonaws.com/dev';
+
+                    fetch(myApi + '/photos/' + file.name, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': file.type,
@@ -170,7 +173,7 @@
                         body: file
                     }).then(res => {
                         if (res.ok) alert("✅ Uploaded (Fallback)!");
-                        else alert("Upload Failed");
+                        else alert("Upload Failed: " + res.status);
                     });
                 });
         }
