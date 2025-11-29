@@ -1,0 +1,15 @@
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Python cache (if we run locally)
+__pycache__/
+*.pyc
+
+# Editors
+.vscode/
+.idea/
+
+# AWS Credentials (NEVER commit these!)
+credentials.csv
+.env
