@@ -89,11 +89,11 @@ def lambda_handler(event, context):
     except Exception as e:
         print(f"Error searching OS: {e}")
 
-    # 6. Return Response
+# 6. Return Response
     return {
         'statusCode': 200,
         'headers': {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*",  # <--- THIS IS CRITICAL
             "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },

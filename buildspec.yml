@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+  build:
+    commands:
+      # 1. Prepare the package
+      - echo "Zipping backend files..."
+      - cd backend
+      - zip -r ../index-photos.zip index-photos.py
+      - zip -r ../search-photos.zip search-photos.py
+      - cd ..
+  post_build:
+    commands:
+      # 2. Update the Lambda Functions created by CloudFormation
+      # We use the specific names you set in the Stack Parameters
+      - echo "Deploying to AWS Lambda..."
+      - aws lambda update-function-code --function-name smart-album-cf-lkd8786-index-photos --zip-file fileb://index-photos.zip
+      - aws lambda update-function-code --function-name smart-album-cf-lkd8786-search-photos --zip-file fileb://search-photos.zip
+```
+
+3.  **Save** the file.
+4.  **Push to GitHub:**
+    ```bash
+    git add .
+    git commit -m "Add buildspec for automation"
+    git push
